@@ -5,23 +5,26 @@ const { signInWithEmailAndPassword } = require("firebase/auth");
 require("dotenv").config();
 
 // local
-const { auth } = require("./services/config.js");
+const router = require("./router.js");
 
 // === CONFIGURATION === //
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(router);
 
-// === FUNCTIONS === //
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in
-    const user = userCredential.user;
-    console.log("USER", user.uid);
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log("ERROR", errorCode, errorMessage);
-  });
+// // === FUNCTIONS === //
+// signInWithEmailAndPassword(auth, email, password)
+//   .then((userCredential) => {
+//     // Signed in
+//     const user = userCredential.user;
+//     console.log("USER", user.uid);
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     console.log("ERROR", errorCode, errorMessage);
+//   });
 
 // === LISTENER === //
 app.listen(process.env.PORT, () => {
