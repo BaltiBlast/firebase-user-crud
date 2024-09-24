@@ -1,30 +1,27 @@
 // === IMPORTS === //
 // npm
 const express = require("express");
-const { initializeApp } = require("firebase/app");
+const { signInWithEmailAndPassword } = require("firebase/auth");
 require("dotenv").config();
+
+// local
+const { auth } = require("./services/config.js");
 
 // === CONFIGURATION === //
 const app = express();
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID,
-};
-
-// Initialize Firebase
-const dbInit = initializeApp(firebaseConfig);
-
-// === ROUTES === //
-// get
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+// === FUNCTIONS === //
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in
+    const user = userCredential.user;
+    console.log("USER", user.uid);
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log("ERROR", errorCode, errorMessage);
+  });
 
 // === LISTENER === //
 app.listen(process.env.PORT, () => {
