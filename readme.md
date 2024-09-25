@@ -14,7 +14,9 @@ Else...
 
 - dotenv
 
-`npm express firebase dotenv`
+- express-session
+
+`npm express firebase dotenv express-session`
 
 ### 2. Add .use in the file you use to launch your server
 

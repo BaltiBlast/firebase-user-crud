@@ -14,7 +14,7 @@ const registerController = {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log("USER", user.uid);
+        console.log("USER REGISTERED");
       })
       .catch((error) => {
         console.error("Error registering user:", error.message);

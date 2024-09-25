@@ -6,7 +6,6 @@ const { deleteUser } = require("firebase/auth");
 const { auth } = require("../../services/config.js");
 
 const deleteUserController = {
-  // This controller need session to be used
   deleteUserPost: (req, res) => {
     const user = auth.currentUser;
     deleteUser(user)
